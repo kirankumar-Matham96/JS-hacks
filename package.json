@@ -1,0 +1,14 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Sample.js",
+  "scripts": {
+    "start": "nodemon Sample.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
