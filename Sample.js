@@ -102,7 +102,7 @@ for (let i = 0; i < 5; i++) {
 console.log(`test1: ${test1}`);
 let test2 = 'Kumar ';
 test2 = test2.repeat(5);
-console.log(`test2${ test2 }`);
+console.log(`test2 ${ test2 }`);
 
 /**
  *
@@ -116,6 +116,11 @@ console.log(~~('WhiteDress'));//return 0
 console.log(~~(NaN));//return 0
 
 console.log(~~('500000'));
+
+console.log('string 50', ("50" | 0));
+console.log('string 50.25', ("50.25" | 0));
+console.log('number 50.25', (50 | 0));
+console.log('number 50.25', (50.25 | 0));
 
 /**
  *
@@ -161,6 +166,7 @@ console.log("here",list1.concat(list2)); // returns the merged values of both ar
 let list3 = ['a', 'b', 'c', 'd', 'e'];
 let list4 = ['f', 'g', 'h', 'i', 'j'];
 
+//reason: pushes elements to same array. Will not create another array.
 console.log(list3.push.apply(list3, list4)); // returns 10, the new length of list3
 console.log(list3); // returns ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 
@@ -229,7 +235,7 @@ console.log("shuffle_list", my_list);
  */
 let entries = [1, [2, 5], [6, 7], 9];
 console.log('org array', entries);
-let flat_array = [].concat(...entries);
+let flat_array = [].concat(...entries);//TODO: try with push.apply
 console.log(`flat_array ${flat_array}`);
 
 /**
@@ -301,5 +307,177 @@ console.log('one', one);
  * converting other data types to boolean
  */
 const data1 = "Hello";
+const data2 = "";
 const bool = !!data1;
 console.log(`bool: ${bool}`);
+console.log(`data2: ${!!data2}`);
+
+//*************************************************************** */
+// PART-2
+//*************************************************************** */
+
+//timer (coinsole method)
+console.time("timer-1");
+let valueA = 10;
+let valueB = 20;
+// console.time("timer-1");
+// for(let i=0;i<10000e6;i++){
+
+// [valueA,valueB] = [valueB,valueA];
+// }
+
+// console.timeEnd("timer-1");
+// console.time("timer-2");
+// let j = 0;
+// while(j<10000e6){
+// [valueA,valueB] = [valueB,valueA];
+// j++
+// }
+// console.timeEnd("timer-2");
+
+//switch case TODO: fix it and make it work
+
+// const test5 = ()=>console.log("test5");
+// const test6 = ()=>console.log("test6");
+// const test7 = ()=>console.log("test7");
+
+// //old way
+// const value5 = 2;
+// switch (value5) {
+//   case 1:
+//     test5();
+//   break;
+
+//   case 2:
+//     test6();
+//   break;
+
+//   case 3:
+//     test7();
+//   break;
+//   // And so on...
+// }
+// //
+// //better way
+
+// let data = {
+//   1: test5,
+//   2: test6,
+//   3: test7
+// };
+// data[1] && data[1]();
+
+/**
+ * use of {} placing it
+ * in function foo, it will return undefined
+ */
+function foo()
+{
+  return
+  {
+    data: 0
+  }
+}
+function bar() {
+  return {
+    data: 0
+  }
+}
+console.log(foo());
+console.log(bar());
+
+/**
+ * TODO: follow this link and use type script
+ * https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/
+ */
+
+/**
+ * simple generator
+ */
+function* customGenerator()
+{
+  let x12 = 0;
+  /**
+   * //when we have yield command and have it inside function8
+   * while(true){
+   *  yield i++;
+   * }
+   */
+  while (yield x12++, true);
+}
+const generateId = customGenerator();
+
+console.log(generateId.next().value);
+console.log(generateId.next().value);
+console.log(generateId.next().value);
+
+/**
+ * example 2
+ */
+function* customGenrator2(len=20){
+        let i = 0;
+        while(yield i+=10,i<=len);
+}
+
+const generateId2 = customGenrator2();
+let j = 11
+while (console.log(generateId2.next()), j--, j != 0);
+
+/**
+ * random generator
+ * use previouse example and do it
+ */
+
+/**
+ * prototype
+ */
+// String.prototype.DoSomeThing = function() {
+//     var printThis = function() {
+//         console.log(this);
+//     }
+//     printThis();
+// }
+String.prototype.DoSomeThing = function ()
+{
+  var self = this;
+    var printThis = function() {
+        console.log(this);
+        console.log(self);
+    }
+    printThis();
+}
+
+
+String.prototype.DoSomeThingArrow = function() {
+    var printThis = () => {
+        console.log(this);
+    }
+    printThis();
+}
+
+"Hello".DoSomeThing();
+"Hello".DoSomeThingArrow();
+
+//TODO: try bind, apply, call.
+
+/**
+ * self invoking function
+ */
+(function (i){
+  console.log('Hello', i);
+})();
+
+(() => console.log('Hi'))();
+
+/**
+ * simple reduce
+ */
+//reducer has accumulator, value, initial value
+var numbers = [1, 2, 3, 4, 5];
+var initial = 0;
+let result = numbers.reduce((accumulator, val) => val + accumulator, initial);
+console.log(`result: ${ result }`);
+
+/**
+ *
+ */
